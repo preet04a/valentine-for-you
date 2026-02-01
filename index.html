@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ♡</title>
+
+  <!-- Playfair Display Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #fde2e4, #fff1f2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      width: 85%;
+      max-width: 360px;
+    }
+
+    h1 {
+      font-style: italic;
+      color: #b9375e;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      font-size: 16px;
+      min-height: 40px;
+    }
+
+    button {
+      padding: 12px 22px;
+      margin: 10px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      font-family: 'Playfair Display', serif;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background: #b9375e;
+      color: white;
+    }
+
+    .yes:hover {
+      background: #a02d4f;
+    }
+
+    .no {
+      background: #f2c6cf;
+      color: #5a2a35;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Will you be my Valentine?</h1>
+    <p id="message">Take your time… I’ll wait ♡</p>
+
+    <button class="yes" onclick="yesClick()">Yes</button>
+    <button class="no" onclick="noClick()">No</button>
+  </div>
+
+  <script>
+    const yesMessages = [
+      "I knew it… you always choose me ♡",
+      "That just made my heart smile.",
+      "You have no idea how happy you made me.",
+      "Okay good… I was hoping you’d say yes."
+    ];
+
+    const noMessages = [
+      "Hmm… I don’t believe you.",
+      "Are you sure? That didn’t sound convincing.",
+      "That ‘no’ was kinda cute though.",
+      "I’ll pretend I didn’t hear that."
+    ];
+
+    function yesClick() {
+      const msg = yesMessages[Math.floor(Math.random() * yesMessages.length)];
+      document.getElementById("message").innerText = msg;
+    }
+
+    function noClick() {
+      const msg = noMessages[Math.floor(Math.random() * noMessages.length)];
+      document.getElementById("message").innerText = msg;
+    }
+  </script>
+
+</body>
+</html>
