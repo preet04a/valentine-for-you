@@ -93,9 +93,13 @@
     ];
 
     function yesClick() {
-      const msg = yesMessages[Math.floor(Math.random() * yesMessages.length)];
-      document.getElementById("message").innerText = msg;
-    }
+  const msg = yesMessages[Math.floor(Math.random() * yesMessages.length)];
+  document.getElementById("message").innerText = msg;
+
+  setTimeout(() => {
+    window.location.href = "menu.html";
+  }, 1500);
+}
 
     function noClick() {
       const msg = noMessages[Math.floor(Math.random() * noMessages.length)];
