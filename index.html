@@ -22,23 +22,31 @@
       justify-content: center;
     }
 
-    /* floating hearts */
+    /* floating hearts – natural drift */
     .heart {
       position: absolute;
       color: rgba(255, 0, 90, 0.35);
       font-size: 20px;
-      animation: floatUp linear infinite;
       pointer-events: none;
+      animation: floatUp linear infinite;
     }
 
     @keyframes floatUp {
-      from {
-        transform: translateY(100vh) scale(0.7);
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.8);
         opacity: 0;
       }
-      20% { opacity: 1; }
-      to {
-        transform: translateY(-10vh) scale(1.2);
+      20% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(50vh) translateX(20px) scale(1);
+      }
+      75% {
+        transform: translateY(10vh) translateX(-20px) scale(1.1);
+      }
+      100% {
+        transform: translateY(-10vh) translateX(10px) scale(1.2);
         opacity: 0;
       }
     }
@@ -68,10 +76,9 @@
       max-width: 420px;
     }
 
-    /* SAME STYLE */
     .title {
       font-style: italic;
-      font-weight: bold; /* BOLD ADDED */
+      font-weight: bold;
       color: #8a004f;
       font-size: 26px;
       margin-bottom: 10px;
@@ -119,7 +126,6 @@
       box-shadow: 0 6px 14px rgba(138, 0, 79, 0.15);
     }
 
-    /* SECOND PAGE */
     .message {
       font-size: 16px;
       line-height: 1.7;
@@ -139,14 +145,14 @@
 
 <!-- floating hearts -->
 <script>
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 28; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-    heart.style.fontSize = 14 + Math.random() * 24 + "px";
-    heart.style.animationDelay = Math.random() * 6 + "s";
+    heart.style.animationDuration = 7 + Math.random() * 7 + "s";
+    heart.style.fontSize = 14 + Math.random() * 22 + "px";
+    heart.style.animationDelay = Math.random() * 8 + "s";
     document.body.appendChild(heart);
   }
 </script>
@@ -155,7 +161,6 @@
 <div class="page" id="page1">
   <div class="card">
     <div class="title">Hey you!</div>
-
     <div class="question">Will you be my Valentine?</div>
 
     <div class="prompt" id="prompt"></div>
