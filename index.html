@@ -1,188 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Will you be my Valentine?</title>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Valentine?</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffd1dc, #ffe6eb);
-      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'Playfair Display', serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    /* Floating hearts */
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd1dc, #ff9eb5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Floating Hearts */
     .heart {
       position: absolute;
-      color: rgba(255, 105, 135, 0.6);
+      color: rgba(255, 0, 90, 0.35);
+      font-size: 20px;
       animation: floatUp linear infinite;
-      pointer-events: none;
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      20% {
+      from {
+        transform: translateY(100vh) scale(0.6);
         opacity: 1;
       }
-      100% {
-        transform: translateY(-10vh);
+      to {
+        transform: translateY(-10vh) scale(1.2);
         opacity: 0;
       }
     }
 
-    .card {
-      background: #fff;
-      padding: 36px 28px;
-      border-radius: 24px;
+    .container {
       text-align: center;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 50px 40px;
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      max-width: 380px;
       width: 90%;
-      max-width: 390px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.15);
-      position: relative;
-      z-index: 10;
+      z-index: 2;
     }
 
     h1 {
-      font-style: italic;
-      color: #8b2c3e;
+      font-size: 34px;
+      color: #b1004b;
       margin-bottom: 10px;
     }
 
     p {
-      color: #6b2a3a;
-      white-space: pre-line;
+      font-size: 16px;
+      color: #5c0030;
+      margin-bottom: 35px;
+      font-style: italic;
     }
 
-    .button-area {
+    .buttons {
       position: relative;
-      height: 120px;
-      margin-top: 20px;
+      height: 80px;
     }
 
     button {
-      padding: 10px 20px;
       border: none;
-      border-radius: 22px;
+      padding: 14px 26px;
       font-size: 16px;
+      border-radius: 40px;
       cursor: pointer;
-      position: absolute;
+      transition: all 0.3s ease;
     }
 
-    .yes {
-      background: #e75480;
+    #yesBtn {
+      background: #ff3d7f;
       color: white;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
+      box-shadow: 0 10px 20px rgba(255, 61, 127, 0.4);
     }
 
-    .no {
-      background: #f3c1cc;
-      color: #6b2a3a;
+    #yesBtn:hover {
+      transform: scale(1.08);
     }
 
-    #revealImg {
+    #noBtn {
+      background: #ffe6ec;
+      color: #b1004b;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    /* Second page */
+    .hidden {
       display: none;
-      width: 100%;
-      border-radius: 16px;
+    }
+
+    .message {
+      font-size: 18px;
+      color: #6b0035;
+      line-height: 1.6;
       margin-top: 20px;
+    }
+
+    .message span {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
 
-<script>
-  // Floating hearts generator
-  for (let i = 0; i < 30; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "♡";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = 14 + Math.random() * 20 + "px";
-    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-    heart.style.animationDelay = Math.random() * 6 + "s";
-    document.body.appendChild(heart);
-  }
-</script>
+  <!-- Floating Hearts -->
+  <script>
+    for (let i = 0; i < 35; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 6 + "s";
+      heart.style.fontSize = 14 + Math.random() * 26 + "px";
+      document.body.appendChild(heart);
+    }
+  </script>
 
-<div class="card">
-  <h1 id="title">Will you be my Valentine?</h1>
-  <p id="message">Choose wisely… ♡</p>
+  <!-- PAGE 1 -->
+  <div class="container" id="page1">
+    <h1>Will you be my Valentine?</h1>
+    <p>Choose wisely… my heart already knows 💗</p>
 
-  <div class="button-area" id="buttons">
-    <button class="yes" onclick="yesClick()">Yes 💖</button>
-    <button class="no" id="noBtn" onclick="noClick()">No 🙃</button>
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
   </div>
 
-  <img
-    id="revealImg"
-    src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
-    alt="heart"
-  />
-</div>
+  <!-- PAGE 2 -->
+  <div class="container hidden" id="page2">
+    <h1>Yay… you chose me 💕</h1>
+    <div class="message">
+      I know things haven’t always been easy for us.  
+      Some days were heavy. Some moments were quiet.  
 
-<script>
-  const noBtn = document.getElementById("noBtn");
-  const centerX = 120;
-  const centerY = 60;
-  let angle = 0;
-  let spins = 0;
-  let orbitActive = true;
+      <span>
+        But through everything, I still choose you.  
+        Again. And again. And always.
+      </span>
 
-  function orbit() {
-    if (!orbitActive) return;
+      I may not have gifts to wrap or plans to promise,  
+      but I have my heart — and it has always been yours.
+    </div>
+  </div>
 
-    angle += 0.05;
-    const radius = 55;
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    let attempts = 0;
 
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    requestAnimationFrame(orbit);
-  }
-
-  orbit();
-
-  function noClick() {
-    spins++;
-    if (spins >= 4) {
-      orbitActive = false;
-      noBtn.style.left = "50%";
-      noBtn.style.top = "85px";
-      noBtn.style.transform = "translateX(-50%)";
-      document.getElementById("message").innerText =
-        "Okay… I’ll listen.\nBut I had a feeling anyway ♡";
-    } else {
-      document.getElementById("message").innerText =
-        "Hmm… that button seems a bit shy.\nTry again ♡";
+    function moveNo() {
+      if (attempts < 5) {
+        const x = Math.random() * 240;
+        const y = Math.random() * 60;
+        noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+        attempts++;
+      }
     }
-  }
 
-  function yesClick() {
-    document.getElementById("title").style.display = "none";
-    document.getElementById("buttons").style.display = "none";
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
 
-    document.getElementById("message").innerText =
-      "I was really hoping you’d say yes.\n\nI know things haven’t always been easy for us,\nand sometimes it feels like we’re figuring it out as we go.\n\nBut I know we’re trying.\nAnd that means everything to me.\n\nNo matter where we are or how things look,\nI choose you.\nAnd I love you.";
-
-    document.getElementById("revealImg").style.display = "block";
-  }
-</script>
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
+    });
+  </script>
 
 </body>
 </html>
