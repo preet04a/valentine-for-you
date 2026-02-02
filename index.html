@@ -2,108 +2,170 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For You ♡</title>
+  <title>Will you be my Valentine?</title>
 
-  <!-- Playfair Display Font -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #fde2e4, #fff1f2);
+      background: linear-gradient(135deg, #ffd1dc, #ffe6eb);
+      overflow: hidden;
+      font-family: 'Playfair Display', serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Playfair Display', serif;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      color: rgba(255, 105, 135, 0.6);
+      font-size: 18px;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
     }
 
     .card {
-      background: #ffffff;
-      padding: 35px;
-      border-radius: 20px;
+      background: #fff;
+      padding: 35px 28px;
+      border-radius: 22px;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-      width: 85%;
-      max-width: 360px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 10;
     }
 
     h1 {
       font-style: italic;
-      color: #b9375e;
+      color: #8b2c3e;
       margin-bottom: 10px;
     }
 
     p {
-      color: #555;
-      font-size: 16px;
-      min-height: 40px;
+      color: #6b2a3a;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 10px;
     }
 
     button {
-      padding: 12px 22px;
-      margin: 10px;
-      border-radius: 30px;
+      padding: 10px 18px;
       border: none;
+      border-radius: 20px;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 15px;
-      font-family: 'Playfair Display', serif;
-      transition: 0.3s;
     }
 
     .yes {
-      background: #b9375e;
+      background: #e75480;
       color: white;
     }
 
-    .yes:hover {
-      background: #a02d4f;
+    .no {
+      background: #f3c1cc;
+      color: #6b2a3a;
+      position: relative;
     }
 
-    .no {
-      background: #f2c6cf;
-      color: #5a2a35;
+    #revealImg {
+      display: none;
+      width: 100%;
+      border-radius: 14px;
+      margin-top: 18px;
+    }
+
+    #message {
+      white-space: pre-line;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Will you be my Valentine?</h1>
-    <p id="message">Take your time… I’ll wait ♡</p>
+  <!-- Floating hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "♡";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      heart.style.fontSize = 14 + Math.random() * 20 + "px";
+      document.body.appendChild(heart);
+    }
+  </script>
 
-    <button class="yes" onclick="yesClick()">Yes</button>
-    <button class="no" onclick="noClick()">No</button>
+  <div class="card">
+    <h1 id="title">Will you be my Valentine?</h1>
+    <p id="message">Choose wisely… ♡</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClick()">Yes 💖</button>
+      <button id="noBtn" class="no" onclick="noClick()">No 🙃</button>
+    </div>
+
+    <img
+      id="revealImg"
+      src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+      alt="flower"
+    />
   </div>
 
   <script>
-    const yesMessages = [
-      "I knew it… you always choose me ♡",
-      "That just made my heart smile.",
-      "You have no idea how happy you made me.",
-      "Okay good… I was hoping you’d say yes."
-    ];
+    let noMoves = 0;
+    const noBtn = document.getElementById("noBtn");
 
-    const noMessages = [
-      "Hmm… I don’t believe you.",
-      "Are you sure? That didn’t sound convincing.",
-      "That ‘no’ was kinda cute though.",
-      "I’ll pretend I didn’t hear that."
-    ];
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
 
-    function yesClick() {
-  const msg = yesMessages[Math.floor(Math.random() * yesMessages.length)];
-  document.getElementById("message").innerText = msg;
+    function moveNo() {
+      if (noMoves < 4) {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
 
-  setTimeout(() => {
-    window.location.href = "menu.html";
-  }, 1500);
-}
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        noMoves++;
+      }
+    }
 
     function noClick() {
-      const msg = noMessages[Math.floor(Math.random() * noMessages.length)];
-      document.getElementById("message").innerText = msg;
+      document.getElementById("message").innerText =
+        "Hmm… I don’t think you mean that.\nTry again ♡";
+    }
+
+    function yesClick() {
+      document.getElementById("title").style.display = "none";
+      document.querySelector(".buttons").style.display = "none";
+
+      document.getElementById("message").innerText =
+        "I was hoping you’d say that.\n\nI know we might not be together that day,\nbut I still wanted to ask you properly.\n\nI’m really glad it’s you.";
+
+      document.getElementById("revealImg").style.display = "block";
     }
   </script>
 
