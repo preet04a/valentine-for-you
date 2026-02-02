@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Will You Be My Valentine?</title>
+  <meta charset="UTF-8">
+  <title>For You</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
       font-family: 'Playfair Display', serif;
     }
 
     body {
+      margin: 0;
       height: 100vh;
       background: linear-gradient(135deg, #ffd1dc, #ff9eb5);
       overflow: hidden;
@@ -24,97 +22,101 @@
       justify-content: center;
     }
 
-    /* Floating Hearts */
+    /* floating hearts */
     .heart {
       position: absolute;
       color: rgba(255, 0, 90, 0.35);
       font-size: 20px;
       animation: floatUp linear infinite;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
       from {
-        transform: translateY(100vh) scale(0.6);
-        opacity: 1;
+        transform: translateY(100vh) scale(0.7);
+        opacity: 0;
       }
+      20% { opacity: 1; }
       to {
         transform: translateY(-10vh) scale(1.2);
         opacity: 0;
       }
     }
 
-    .container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.25);
+    .page {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.28);
       backdrop-filter: blur(10px);
-      padding: 50px 40px;
-      border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-      max-width: 380px;
+      padding: 48px 36px;
+      border-radius: 26px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+      text-align: center;
       width: 90%;
-      z-index: 2;
+      max-width: 420px;
     }
 
     h1 {
-      font-size: 34px;
-      color: #b1004b;
-      margin-bottom: 10px;
+      font-style: italic;
+      color: #8a004f;
+      margin-bottom: 26px;
     }
 
-    p {
-      font-size: 16px;
-      color: #5c0030;
-      margin-bottom: 35px;
-      font-style: italic;
+    .prompt {
+      color: #7a0040;
+      margin-bottom: 30px;
+      min-height: 24px;
+      font-size: 15px;
     }
 
     .buttons {
-      position: relative;
-      height: 80px;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
     }
 
     button {
+      padding: 12px 28px;
+      border-radius: 999px;
       border: none;
-      padding: 14px 26px;
       font-size: 16px;
-      border-radius: 40px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      background: none;
     }
 
-    #yesBtn {
+    .yes {
       background: #ff3d7f;
-      color: white;
+      color: #fff;
       box-shadow: 0 10px 20px rgba(255, 61, 127, 0.4);
     }
 
-    #yesBtn:hover {
-      transform: scale(1.08);
-    }
-
-    #noBtn {
+    .no {
       background: #ffe6ec;
-      color: #b1004b;
-      position: absolute;
-      right: 0;
-      top: 0;
+      color: #8a004f;
     }
 
-    /* Second page */
-    .hidden {
-      display: none;
-    }
-
+    /* second page */
     .message {
-      font-size: 18px;
-      color: #6b0035;
-      line-height: 1.6;
-      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #6b0038;
     }
 
     .message span {
       display: block;
-      margin-top: 12px;
+      margin-top: 14px;
       font-weight: bold;
     }
   </style>
@@ -122,79 +124,84 @@
 
 <body>
 
-  <!-- Floating Hearts -->
-  <script>
-    for (let i = 0; i < 35; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 4 + Math.random() * 6 + "s";
-      heart.style.fontSize = 14 + Math.random() * 26 + "px";
-      document.body.appendChild(heart);
-    }
-  </script>
+<!-- floating hearts -->
+<script>
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+    heart.style.fontSize = 14 + Math.random() * 24 + "px";
+    heart.style.animationDelay = Math.random() * 6 + "s";
+    document.body.appendChild(heart);
+  }
+</script>
 
-  <!-- PAGE 1 -->
-  <div class="container" id="page1">
-    <h1>Will you be my Valentine?</h1>
-    <p>Choose wisely… my heart already knows 💗</p>
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <div class="card">
+    <h1>Hey you!</h1>
+
+    <div class="prompt" id="prompt">
+      Will you be my Valentine?
+    </div>
 
     <div class="buttons">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No 🙈</button>
+      <button class="yes" id="yesBtn">Yes 💖</button>
+      <button class="no" id="noBtn">No</button>
     </div>
   </div>
+</div>
 
-  <!-- PAGE 2 -->
-  <div class="container hidden" id="page2">
-    <h1>Yay… you chose me 💕</h1>
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+  <div class="card">
     <div class="message">
-       I know things haven’t been easy for us lately.<br>
-      Some days have felt heavy.<br>
-      Some moments have been quiet.<br><br>
+      I know things haven’t been easy for us lately.  
+      Some days have felt heavy.  
 
-      Sometimes it feels like we’re figuring things out as we go.<br>
-      But I know we’re trying.<br>
-      And that means everything to me.<br><br>
+      <span>
+        But I know we’re trying —  
+        and that means everything to me.
+      </span>
 
-      No matter where we are,<br>
-      or how things look,<br>
-      I still choose you.<br><br>
+      No matter where we are  
+      or how things look,  
+      I still choose you.
 
-      Again.<br>
-      And again.<br>
-      And always.<br><br>
+      <span>
+        Again. And again. And always.
+      </span>
 
-      I may not have gifts to wrap<br>
-      or plans to promise,<br>
-      but I have my heart —<br>
-      and it has always been yours ♥️
+      I love you. ♥️
     </div>
   </div>
+</div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    let attempts = 0;
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const prompt = document.getElementById("prompt");
 
-    function moveNo() {
-      if (attempts < 5) {
-        const x = Math.random() * 240;
-        const y = Math.random() * 60;
-        noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
-        attempts++;
-      }
+  let noClicks = 0;
+
+  noBtn.onclick = () => {
+    noClicks++;
+    if (noClicks === 1) {
+      prompt.innerText = "Hmm… that doesn’t sound right.";
+    } else if (noClicks === 2) {
+      prompt.innerText = "Okay, now you’re just lying.";
+    } else {
+      prompt.innerText = "Nice try 😌";
     }
+  };
 
-    noBtn.addEventListener("mouseenter", moveNo);
-    noBtn.addEventListener("touchstart", moveNo);
-
-    yesBtn.addEventListener("click", () => {
-      document.getElementById("page1").classList.add("hidden");
-      document.getElementById("page2").classList.remove("hidden");
-    });
-  </script>
+  yesBtn.onclick = () => {
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+  };
+</script>
 
 </body>
 </html>
