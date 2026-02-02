@@ -68,17 +68,28 @@
       max-width: 420px;
     }
 
-    h1 {
+    /* SAME STYLE FOR BOTH LINES */
+    .title {
       font-style: italic;
       color: #8a004f;
-      margin-bottom: 26px;
+      font-size: 26px;
+      margin-bottom: 10px;
     }
 
+    .question {
+      font-style: italic;
+      color: #8a004f;
+      font-size: 26px;
+      font-weight: bold; /* REQUIRED */
+      margin-bottom: 14px;
+    }
+
+    /* PROMPT BETWEEN QUESTION AND BUTTONS */
     .prompt {
       color: #7a0040;
-      margin-bottom: 30px;
-      min-height: 24px;
       font-size: 15px;
+      min-height: 24px;
+      margin-bottom: 28px;
     }
 
     .buttons {
@@ -107,16 +118,17 @@
       color: #8a004f;
     }
 
-    /* second page */
+    /* SECOND PAGE */
     .message {
       font-size: 16px;
       line-height: 1.7;
       color: #6b0038;
+      text-align: center;
     }
 
-    .message span {
+    .message .emphasis {
       display: block;
-      margin-top: 14px;
+      margin: 14px 0;
       font-weight: bold;
     }
   </style>
@@ -141,11 +153,12 @@
 <!-- PAGE 1 -->
 <div class="page" id="page1">
   <div class="card">
-    <h1>Hey you!</h1>
+    <div class="title">Hey you!</div>
 
-    <div class="prompt" id="prompt">
-      Will you be my Valentine?
-    </div>
+    <div class="question">Will you be my Valentine?</div>
+
+    <!-- PROMPT GOES HERE -->
+    <div class="prompt" id="prompt"></div>
 
     <div class="buttons">
       <button class="yes" id="yesBtn">Yes 💖</button>
@@ -159,22 +172,23 @@
   <div class="card">
     <div class="message">
       I know things haven’t been easy for us lately.  
-      Some days have felt heavy.  
-
-      <span>
-        But I know we’re trying —  
-        and that means everything to me.
-      </span>
-
+      Some days were heavy.  
+      Some moments were quiet.  
+      <br><br>
+      Sometimes it feels like we’re figuring it out as we go.  
+      But I know we’re trying.  
+      And that means everything to me.  
+      <br><br>
       No matter where we are  
       or how things look,  
       I still choose you.
-
-      <span>
+      <span class="emphasis">
         Again. And again. And always.
       </span>
-
-      I love you. ♥️
+      I may not have gifts to wrap  
+      or plans to promise,  
+      but I have my heart,  
+      and it has always been yours ♥️
     </div>
   </div>
 </div>
