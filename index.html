@@ -68,9 +68,10 @@
       max-width: 420px;
     }
 
-    /* SAME STYLE FOR BOTH LINES */
+    /* SAME STYLE */
     .title {
       font-style: italic;
+      font-weight: bold; /* BOLD ADDED */
       color: #8a004f;
       font-size: 26px;
       margin-bottom: 10px;
@@ -80,16 +81,16 @@
       font-style: italic;
       color: #8a004f;
       font-size: 26px;
-      font-weight: bold; /* REQUIRED */
+      font-weight: bold;
       margin-bottom: 14px;
     }
 
-    /* PROMPT BETWEEN QUESTION AND BUTTONS */
     .prompt {
       color: #7a0040;
       font-size: 15px;
       min-height: 24px;
       margin-bottom: 28px;
+      transition: all 0.3s ease;
     }
 
     .buttons {
@@ -104,7 +105,6 @@
       border: none;
       font-size: 16px;
       cursor: pointer;
-      background: none;
     }
 
     .yes {
@@ -114,8 +114,9 @@
     }
 
     .no {
-      background: #ffe6ec;
+      background: linear-gradient(135deg, #ffe6ec, #ffd1dc);
       color: #8a004f;
+      box-shadow: 0 6px 14px rgba(138, 0, 79, 0.15);
     }
 
     /* SECOND PAGE */
@@ -157,12 +158,11 @@
 
     <div class="question">Will you be my Valentine?</div>
 
-    <!-- PROMPT GOES HERE -->
     <div class="prompt" id="prompt"></div>
 
     <div class="buttons">
       <button class="yes" id="yesBtn">Yes 💖</button>
-      <button class="no" id="noBtn">No</button>
+      <button class="no" id="noBtn">No 🙈</button>
     </div>
   </div>
 </div>
@@ -198,17 +198,19 @@
   const noBtn = document.getElementById("noBtn");
   const prompt = document.getElementById("prompt");
 
+  const noPrompts = [
+    "Hmm… that doesn’t sound right.",
+    "That felt illegal 😌",
+    "Nice try, but no.",
+    "You’re joking. I know you are.",
+    "Okay… be serious now."
+  ];
+
   let noClicks = 0;
 
   noBtn.onclick = () => {
+    prompt.innerText = noPrompts[noClicks % noPrompts.length];
     noClicks++;
-    if (noClicks === 1) {
-      prompt.innerText = "Hmm… that doesn’t sound right.";
-    } else if (noClicks === 2) {
-      prompt.innerText = "Okay, now you’re just lying.";
-    } else {
-      prompt.innerText = "Nice try 😌";
-    }
   };
 
   yesBtn.onclick = () => {
